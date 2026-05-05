@@ -19,6 +19,8 @@ namespace ProjetoEscola.Data
 
         public DbSet<Matricula_Disciplinas> Matriculas { get; set; }
 
+        public DbSet<Usuario> Usuarios { get; set; }
+
         // Configuração Turmas
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

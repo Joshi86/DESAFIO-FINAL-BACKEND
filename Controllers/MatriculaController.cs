@@ -51,6 +51,20 @@ namespace ProjetoEscola.Controllers
             }
         }
 
+        [HttpPut("nota")]
+        public async Task<IActionResult> LancarNota([FromBody] NotaDTO dto)
+        {
+            try
+            {
+                await _service.LancarNota(dto);
+                return Ok("Nota lançada com sucesso");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

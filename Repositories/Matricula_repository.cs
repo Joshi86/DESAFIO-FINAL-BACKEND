@@ -14,9 +14,32 @@ namespace ProjetoEscola.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Matricula_Disciplinas>> ListarTodos()
+        public async Task<IEnumerable<object>> ListarTodos()
         {
-            return await _context.Matriculas.ToListAsync();
+            return await _context.Matriculas
+                .Include(m => m.Aluno)
+                .Include(m => m.Disciplina)
+                .Select(m => new
+                {
+                    id = m.ID,
+                    aluno = m.Aluno.Nome,
+                    disciplina = m.Disciplina.Nome,
+                    nota = m.Nota
+                })
+                .ToListAsync();
+        }
+
+        public async Task<Matricula_Disciplinas?> ObterPorAlunoEDisciplina(int alunoId, int disciplinaId)
+        {
+            return await _context.Matriculas
+              .Include(m => m.Disciplina)
+              .Include(m => m.Aluno)
+              .FirstOrDefaultAsync(m => m.AlunoId == alunoId && m.DisciplinaId == disciplinaId);
+        }
+
+        public async Task Salvar()
+        {
+            await _context.SaveChangesAsync();
         }
 
         public async Task<Matricula_Disciplinas?> ObterPorId(int id)

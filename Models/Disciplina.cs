@@ -8,6 +8,8 @@ namespace ProjetoEscola.Models
         public string Nome { get; set; } = string.Empty;
         public int CargaHoraria { get; set; }
 
+        public ICollection<Matricula_Disciplinas> Matriculas { get; set; } = new List<Matricula_Disciplinas>();
+
         public List<Turma> Turmas { get; set; } = new();
 
     }

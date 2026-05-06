@@ -1,16 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace ProjetoEscola.DTOs
+
 {
-    public class MatriculaDTO
+    public class NotaDTO
     {
-        [Required]
         public int AlunoId { get; set; }
-
-        [Required]
         public int DisciplinaId { get; set; }
-
-        [Required]
         public decimal Nota { get; set; }
     }
 }

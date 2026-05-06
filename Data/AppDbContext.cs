@@ -15,17 +15,25 @@ namespace ProjetoEscola.Data
         public DbSet<Professor> Professores { get; set; }
         public DbSet<Disciplina> Disciplinas { get; set; }
 
+
         public DbSet<Turma> Turmas { get; set; }
 
         public DbSet<Matricula_Disciplinas> Matriculas { get; set; }
 
         public DbSet<Usuario> Usuarios { get; set; }
 
-        // Configuração Turmas
+        // Configuração
+        //
+        // s
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Matricula_Disciplinas>()
+                .HasOne(m => m.Disciplina)
+                .WithMany(d => d.Matriculas)
+                .HasForeignKey(m => m.DisciplinaId);
 
             modelBuilder.Entity<Turma>()
                 .HasOne(t => t.Professor)

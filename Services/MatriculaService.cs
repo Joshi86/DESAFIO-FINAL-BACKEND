@@ -14,20 +14,42 @@ namespace ProjetoEscola.Services
             _repository = repository;
         }
 
-        public async Task<IEnumerable<Matricula_Disciplinas>> ListarTodos() => await _repository.ListarTodos();
+        public async Task<IEnumerable<object>> ListarTodos()
+    => await _repository.ListarTodos();
 
-        public async Task Criar(MatriculaDTO dto)
+        public async Task Criar(MatriculaDTO dto)   
         {
             var matricula = new Matricula_Disciplinas
             {
                 AlunoId = dto.AlunoId,
-                TurmaId = dto.TurmaId,
-                Nota = dto.Nota
+                DisciplinaId = dto.DisciplinaId,
+                Nota = (double)dto.Nota
             };
 
             await _repository.Adicionar(matricula);
         }
 
+        public async Task LancarNota(NotaDTO dto)
+        {
+            var matricula = await _repository.ObterPorAlunoEDisciplina(dto.AlunoId, dto.DisciplinaId);
+
+            if (matricula == null)
+            {
+                matricula = new Matricula_Disciplinas
+                {
+                    AlunoId = dto.AlunoId,
+                    DisciplinaId = dto.DisciplinaId,
+                    Nota = (double)dto.Nota
+                };
+
+                await _repository.Adicionar(matricula);
+                return;
+            }
+
+            matricula.Nota = (double)dto.Nota;
+
+            await _repository.Salvar();
+        }
         public async Task Atualizar(int id, MatriculaDTO dto)
         {
             var matricula = await _repository.ObterPorId(id);
@@ -36,8 +58,7 @@ namespace ProjetoEscola.Services
                 throw new Exception("Matrícula não encontrada.");
 
             matricula.AlunoId = dto.AlunoId;
-            matricula.TurmaId = dto.TurmaId;
-            matricula.Nota = dto.Nota;
+            matricula.Nota = (double)dto.Nota;
 
             await _repository.Atualizar(matricula);
         }

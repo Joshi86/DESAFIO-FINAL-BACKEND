@@ -12,8 +12,8 @@ using ProjetoEscola.Data;
 namespace ProjetoEscola.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260505170853_AjusteDisciplina")]
-    partial class AjusteDisciplina
+    [Migration("20260506131519_InitialClean")]
+    partial class InitialClean
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -86,16 +86,11 @@ namespace ProjetoEscola.Migrations
                     b.Property<double>("Nota")
                         .HasColumnType("double");
 
-                    b.Property<int>("TurmaId")
-                        .HasColumnType("int");
-
                     b.HasKey("ID");
 
                     b.HasIndex("AlunoId");
 
                     b.HasIndex("DisciplinaId");
-
-                    b.HasIndex("TurmaId");
 
                     b.ToTable("Matriculas");
                 });
@@ -178,22 +173,14 @@ namespace ProjetoEscola.Migrations
                         .IsRequired();
 
                     b.HasOne("ProjetoEscola.Models.Disciplina", "Disciplina")
-                        .WithMany()
+                        .WithMany("Matriculas")
                         .HasForeignKey("DisciplinaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProjetoEscola.Models.Turma", "Turma")
-                        .WithMany()
-                        .HasForeignKey("TurmaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Aluno");
 
                     b.Navigation("Disciplina");
-
-                    b.Navigation("Turma");
                 });
 
             modelBuilder.Entity("ProjetoEscola.Models.Turma", b =>
@@ -222,6 +209,8 @@ namespace ProjetoEscola.Migrations
 
             modelBuilder.Entity("ProjetoEscola.Models.Disciplina", b =>
                 {
+                    b.Navigation("Matriculas");
+
                     b.Navigation("Turmas");
                 });
 

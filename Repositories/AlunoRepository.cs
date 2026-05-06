@@ -51,6 +51,7 @@ namespace ProjetoEscola.Repositories
         {
             return await _context.Alunos
                 .Include(a => a.Matriculas)
+                    .ThenInclude(m => m.Disciplina)
                 .FirstOrDefaultAsync(a => a.ID == id);
         }
 

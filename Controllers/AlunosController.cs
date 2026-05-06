@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProjetoEscola.DTOs;
 using ProjetoEscola.Models;
 using ProjetoEscola.Repositories;
@@ -48,6 +49,20 @@ namespace ProjetoEscola.Controllers
                     Media = resultado.media,
                     Status = resultado.aprovado ? "Aprovado" : "Reprovado"
                 });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("{id}/notas")]
+        public async Task<IActionResult> ObterNotas(int id)
+        {
+            try
+            {
+                var resultado = await _service.ObterNotas(id);
+                return Ok(resultado);
             }
             catch (Exception ex)
             {

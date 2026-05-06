@@ -12,6 +12,8 @@ namespace ProjetoEscola.Services
         Task Atualizar(int id, AlunoDTO dto);
         Task Deletar(int id);
 
+        Task<IEnumerable<object>> ObterNotas(int alunoId);
+
         Task<(double media, bool aprovado)> CalcularMedia(int alunoId);
     }
 }

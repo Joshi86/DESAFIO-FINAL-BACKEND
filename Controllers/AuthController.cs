@@ -45,5 +45,6 @@ namespace ProjetoEscola.Controllers
 
             return Ok(new { token = "fake-token" });
         }
+
     }
 }

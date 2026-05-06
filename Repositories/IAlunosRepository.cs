@@ -7,7 +7,7 @@ namespace ProjetoEscola.Repositories
     {
         Task<IEnumerable<Aluno>> ListarTodos();
         Task Adicionar(Aluno aluno);
-
+        Task<Aluno?> ObterComNotas(int id);
         Task<Aluno?> ObterPorId(int id);
         Task Atualizar(Aluno aluno);
         Task Deletar(Aluno aluno);

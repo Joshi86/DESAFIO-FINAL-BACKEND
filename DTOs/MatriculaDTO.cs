@@ -8,7 +8,7 @@ namespace ProjetoEscola.DTOs
         public int AlunoId { get; set; }
 
         [Required]
-        public int TurmaId { get; set; }
+        public int DisciplinaId { get; set; }
 
         [Required]
         public double Nota { get; set; }

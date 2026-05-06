@@ -60,6 +60,21 @@ namespace ProjetoEscola.Services
             await _repository.Deletar(aluno);
         }
 
+        public async Task<IEnumerable<object>> ObterNotas(int alunoId)
+        {
+            var aluno = await _repository.ObterComNotas(alunoId);
+
+            if (aluno == null)
+                throw new Exception("Aluno não encontrado");
+
+            return aluno.Matriculas.Select(m => new
+            {
+                disciplina = m.Disciplina.Nome,
+                nota = m.Nota,
+                situacao = m.Nota >= 7 ? "Aprovado" : "Reprovado"
+            });
+        }
+
         public async Task<(double media, bool aprovado)> CalcularMedia(int alunoId)
         {
             var aluno = await _repository.ObterPorId(alunoId);

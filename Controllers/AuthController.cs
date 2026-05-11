@@ -2,6 +2,10 @@
 using ProjetoEscola.Data;
 using ProjetoEscola.DTOs;
 using ProjetoEscola.Models;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace ProjetoEscola.Controllers
 {
@@ -10,10 +14,12 @@ namespace ProjetoEscola.Controllers
     public class AuthController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IConfiguration _configuration;
 
-        public AuthController(AppDbContext context)
+        public AuthController(AppDbContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         [HttpPost("register")]
@@ -43,8 +49,35 @@ namespace ProjetoEscola.Controllers
             if (user == null)
                 return Unauthorized("Usuário ou senha inválidos");
 
-            return Ok(new { token = "fake-token" });
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
+            new Claim(ClaimTypes.Name, user.Username)
+        }),
+
+                Expires = DateTime.UtcNow.AddHours(2),
+
+                Issuer = "ProjetoEscola",
+                Audience = "UsuariosDoSite",
+
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return Ok(new
+            {
+                token = tokenHandler.WriteToken(token)
+            });
         }
 
     }
+
 }

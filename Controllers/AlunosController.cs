@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjetoEscola.DTOs;
 using ProjetoEscola.Models;
@@ -9,6 +10,7 @@ using static System.Net.WebRequestMethods;
 
 namespace ProjetoEscola.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AlunosController : ControllerBase

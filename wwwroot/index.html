@@ -4,74 +4,102 @@
 <meta charset="UTF-8">
 <title>Login</title>
 
-<!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body class="bg-light">
+<body class="bg-light d-flex justify-content-center align-items-center vh-100">
 
+    <script>
+        if (localStorage.getItem("token")) {
+            window.location.href = "home.html";
+        }
+    </script>
 
-<script>
-    if (localStorage.getItem("token")) {
-        window.location.href = "home.html";
-</script>
+    <div class="d-flex flex-column align-items-center">
 
-<div class="container vh-100 d-flex justify-content-center align-items-center">
+        <div class="text-center mb-4">
 
-    <div class="card shadow p-4" style="width: 350px;">
+            <h1 class="display-3">🎓</h1>
 
-        <h4 class="text-center mb-4">Login</h4>
+            <h3 class="fw-bold">
+                Escola do Joshi
+            </h3>
 
-        <form onsubmit="event.preventDefault(); login();">
+            <p class="text-muted">
+                Sistema Escolar
+            </p>
 
-            <div class="mb-3">
-                <label class="form-label">Usuário</label>
-                <input type="text" id="usuario" class="form-control" placeholder="Digite seu usuário">
+        </div>
+
+        <div class="card shadow p-4 border-0" style="width: 350px; border-radius: 18px;">
+
+            <h4 class="text-center mb-4">Login</h4>
+
+            <form onsubmit="event.preventDefault(); login();">
+
+                <div class="mb-3">
+                    <label class="form-label">Usuário</label>
+
+                    <input type="text"
+                           id="usuario"
+                           class="form-control"
+                           placeholder="Digite seu usuário">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Senha</label>
+
+                    <input type="password"
+                           id="senha"
+                           class="form-control"
+                           placeholder="Digite sua senha">
+                </div>
+
+                <button type="submit"
+                        class="btn btn-primary w-100">
+                    Entrar
+                </button>
+
+                <p class="text-center mt-3">
+                    Não tem conta?
+                    <a href="#" onclick="mostrarCadastro()">
+                        Cadastrar
+                    </a>
+                </p>
+
+                <p id="erro" class="text-danger text-center mt-3"></p>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="modalCadastro" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Cadastro</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <input type="text" id="novoUsuario" class="form-control mb-2" placeholder="Usuário">
+                    <input type="password" id="novaSenha" class="form-control" placeholder="Senha">
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-success" onclick="cadastrar()">Cadastrar</button>
+                </div>
+
             </div>
-
-            <div class="mb-3">
-                <label class="form-label">Senha</label>
-                <input type="password" id="senha" class="form-control" placeholder="Digite sua senha">
-            </div>
-
-            <button type="submit" class="btn btn-primary w-100" onclick="login()">Entrar</button>
-
-            <p class="text-center mt-3">Não tem conta? <a href="#" onclick="mostrarCadastro()">Cadastrar</a>    </p>
-
-            <p id="erro" class="text-danger text-center mt-3"></p>
-
-        </form>
-
-<div class="modal fade" id="modalCadastro" tabindex="-1">
-<div class="modal-dialog">
-<div class="modal-content">
-
-    <div class="modal-header">
-     <h5 class="modal-title">Cadastro</h5>
-     <button class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
     </div>
 
-    <div class="modal-body">
-     <input type="text" id="novoUsuario" class="form-control mb-2" placeholder="Usuário">
-     <input type="password" id="novaSenha" class="form-control" placeholder="Senha">
-    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <div class="modal-footer">
-     <button class="btn btn-success" onclick="cadastrar()">Cadastrar</button>
-    </div>
-
-</div>
-</div>
-</div>
-
-</div>
-
-</div>
-
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-<script src="login.js"></script>
+    <script src="login.js"></script>
 
 </body>
 </html>

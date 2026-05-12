@@ -31,7 +31,8 @@ namespace ProjetoEscola.Controllers
             var user = new Usuario
             {
                 Username = dto.Username,
-                Senha = dto.Senha
+                Senha = dto.Senha,
+                Role = dto.Role
             };
 
             _context.Usuarios.Add(user);

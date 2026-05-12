@@ -23,8 +23,6 @@ namespace ProjetoEscola.Data
         public DbSet<Usuario> Usuarios { get; set; }
 
         // Configuração
-        //
-        // s
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

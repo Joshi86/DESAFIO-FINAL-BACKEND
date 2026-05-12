@@ -5,38 +5,103 @@
 <meta charset="UTF-8">
   
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+    .card {
+        border-radius: 16px;
+    }
+
+    .btn {
+        border-radius: 10px;
+    }
+
+    .modal-content {
+        border-radius: 16px;
+    }
+
+    table tbody tr {
+        transition: background-color 0.2s;
+    }
+
+        table tbody tr:hover {
+            background-color: #f1f3f5;
+        }
+</style>
+
 </head>
-<body class="bg-light">
 
-    <nav class="navbar navbar-dark bg-dark px-3">
+<body style="background-color: #f4f6f9;">
 
-        <span class="navbar-brand mb-0 h1">Escola do Joshi</span>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+        <div class="container-fluid">
 
-        <button class="btn btn-danger" onclick="logout()">Logout</button>
+            <span class="navbar-brand fw-bold">
+                🎓 Escola do Joshi
+            </span>
 
+            <button class="btn btn-light btn-sm" onclick="logout()">
+                Sair
+            </button>
+
+        </div>
     </nav>
 
     <!-- LISTA -->
 
-    <div class="container mt-5">
+    <div class="container py-5">
 
-        <h2 class="mb-4">Lista de Alunos</h2>
+        <div class="card shadow border-0">
 
-        <button class="btn btn-primary mb-3" onclick="abrirFormulario()">Novo Aluno</button>
-        <button class="btn btn-secondary mb-3" onclick="abrirDisciplina()">Nova Disciplina</button>
+            <div class="card-body">
 
-        <table class="table table-striped table-bordered">
-            <thead class="table-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>CPF</th>
-                    <th>Nascimento</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody id="tabelaAlunos"></tbody>
-        </table>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+
+                    <h2 class="mb-0">
+                        Lista de Alunos
+                    </h2>
+
+                    <div>
+                        <button class="btn btn-primary me-2"
+                                onclick="abrirFormulario()">
+
+                            + Novo Aluno
+                        </button>
+
+                        <button class="btn btn-secondary"
+                                onclick="abrirDisciplina()">
+
+                            + Disciplina
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="table-responsive">
+
+                    <table class="table table-hover align-middle">
+
+                        <thead class="table-dark">
+
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>CPF</th>
+                                <th>Nascimento</th>
+                                <th width="320">Ações</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="tabelaAlunos"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
@@ -44,7 +109,7 @@
 
     <div class="modal fade" id="modalDisciplina">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content border-0 shadow-lg">
 
                 <div class="modal-header">
                     <h5 class="modal-title">Nova Disciplina</h5>
@@ -66,7 +131,7 @@
 
     <div class="modal fade" id="modalAluno" tabindex="-1">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content border-0 shadow-lg">
 
                 <div class="modal-header">
                     <h5 class="modal-title">Aluno</h5>
@@ -102,7 +167,7 @@
 
     <div class="modal fade" id="modalNota">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content border-0 shadow-lg">
 
                 <div class="modal-header">
                     <h5 class="modal-title">Lançar Nota</h5>
@@ -133,7 +198,7 @@
 
     <div class="modal fade" id="modalVerNotas">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content border-0 shadow-lg">
 
                 <div class="modal-header">
                     <h5 class="modal-title">Notas do Aluno</h5>

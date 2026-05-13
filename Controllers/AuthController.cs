@@ -34,7 +34,7 @@ namespace ProjetoEscola.Controllers
                 Senha = dto.Senha,
             };
 
-            _context.Usuarios.Add(user);
+            await _context.Usuarios.AddAsync(user);
             await _context.SaveChangesAsync();
 
             return Ok("Usuário cadastrado");

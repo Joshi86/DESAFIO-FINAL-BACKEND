@@ -12,8 +12,8 @@ using ProjetoEscola.Data;
 namespace ProjetoEscola.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260506131519_InitialClean")]
-    partial class InitialClean
+    [Migration("20260513113535_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

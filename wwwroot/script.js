@@ -156,7 +156,7 @@ async function salvarAluno() {
 
     const dados = {
         nome,
-        cpf,
+        cpf: cpfLimpo,
         dataNascimento
     };
 
@@ -267,7 +267,7 @@ async function salvarDisciplina() {
     modalDisciplina.hide();
 
     alert("Disciplina criada!");
-} ("Disciplina criada!");
+}
 
 
 // ========================

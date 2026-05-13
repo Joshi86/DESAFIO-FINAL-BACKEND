@@ -48,57 +48,72 @@ function mostrarCadastro() {
 }
 
 async function cadastrar() {
+
     const username =
-        document.getElementById("novoUsuario");
+        document.getElementById("novoUsuario").value;
 
     const senha =
+        document.getElementById("novaSenha").value;
+
+    const usernameInput =
+        document.getElementById("novoUsuario");
+
+    const senhaInput =
         document.getElementById("novaSenha");
 
     let valido = true;
 
-    if (username.value.trim() === "") {
+    if (username.trim() === "") {
 
-        username.classList.add("is-invalid");
+        usernameInput.classList.add("is-invalid");
 
         valido = false;
 
     } else {
 
-        username.classList.remove("is-invalid");
+        usernameInput.classList.remove("is-invalid");
     }
 
-    if (senha.value.trim() === "") {
+    if (senha.trim() === "") {
 
-        senha.classList.add("is-invalid");
+        senhaInput.classList.add("is-invalid");
 
         valido = false;
 
     } else {
 
-        senha.classList.remove("is-invalid");
+        senhaInput.classList.remove("is-invalid");
     }
 
     if (!valido)
         return;
 
     try {
+
         const res = await fetch(`${api}/auth/register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ username, senha })
+            body: JSON.stringify({
+                username,
+                senha
+            })
         });
 
         if (!res.ok) {
+
             const msg = await res.text();
+
             throw new Error(msg);
         }
 
         alert("Usuário cadastrado!");
+
         modalCadastro.hide();
 
     } catch (e) {
+
         alert(e.message);
     }
 }

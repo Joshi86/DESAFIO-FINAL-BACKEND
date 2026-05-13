@@ -32,14 +32,13 @@ namespace ProjetoEscola.Controllers
             {
                 Username = dto.Username,
                 Senha = dto.Senha,
-                Role = dto.Role
             };
 
             _context.Usuarios.Add(user);
             await _context.SaveChangesAsync();
 
             return Ok("Usuário cadastrado");
-        }
+        }   
 
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginDTO dto)

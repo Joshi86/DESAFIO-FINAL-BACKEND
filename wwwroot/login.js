@@ -48,8 +48,38 @@ function mostrarCadastro() {
 }
 
 async function cadastrar() {
-    const username = document.getElementById("novoUsuario").value;
-    const senha = document.getElementById("novaSenha").value;
+    const username =
+        document.getElementById("novoUsuario");
+
+    const senha =
+        document.getElementById("novaSenha");
+
+    let valido = true;
+
+    if (username.value.trim() === "") {
+
+        username.classList.add("is-invalid");
+
+        valido = false;
+
+    } else {
+
+        username.classList.remove("is-invalid");
+    }
+
+    if (senha.value.trim() === "") {
+
+        senha.classList.add("is-invalid");
+
+        valido = false;
+
+    } else {
+
+        senha.classList.remove("is-invalid");
+    }
+
+    if (!valido)
+        return;
 
     try {
         const res = await fetch(`${api}/auth/register`, {

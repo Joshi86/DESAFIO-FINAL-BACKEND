@@ -110,11 +110,56 @@ async function salvarAluno() {
 
     const id = document.getElementById("alunoId").value;
 
+    const nome = document.getElementById("nome").value.trim();
+
+    const dataNascimento =
+        document.getElementById("dataNascimento").value;
+
+    if (nome === "") {
+
+        document.getElementById("nome")
+            .classList.add("is-invalid");
+
+        return;
+    }
+
+    document.getElementById("nome")
+        .classList.remove("is-invalid");
+
+    const cpf = document.getElementById("cpf").value;
+
+    const regexCpf = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
+
+    if (!regexCpf.test(cpf)) {
+
+        document.getElementById("cpf")
+            .classList.add("is-invalid");
+
+        return;
+    }
+
+    document.getElementById("cpf")
+        .classList.remove("is-invalid");
+
+    const cpfLimpo = cpf.replace(/\D/g, "");
+
+    if (dataNascimento === "") {
+
+        document.getElementById("dataNascimento")
+            .classList.add("is-invalid");
+
+        return;
+    }
+
+    document.getElementById("dataNascimento")
+        .classList.remove("is-invalid");
+
     const dados = {
-        nome: document.getElementById("nome").value,
-        cpf: document.getElementById("cpf").value,
-        dataNascimento: document.getElementById("dataNascimento").value
+        nome,
+        cpf,
+        dataNascimento
     };
+
 
     if (id) {
 
@@ -175,10 +220,37 @@ function abrirDisciplina() {
 async function salvarDisciplina() {
 
     const nome =
-        document.getElementById("disciplinaNome").value;
+        document.getElementById("disciplinaNome");
 
     const cargaHoraria =
-        document.getElementById("cargaHoraria").value;
+        document.getElementById("cargaHoraria");
+
+    let valido = true;
+
+    if (nome.value.trim() === "") {
+
+        nome.classList.add("is-invalid");
+
+        valido = false;
+
+    } else {
+
+        nome.classList.remove("is-invalid");
+    }
+
+    if (cargaHoraria.value.trim() === "") {
+
+        cargaHoraria.classList.add("is-invalid");
+
+        valido = false;
+
+    } else {
+
+        cargaHoraria.classList.remove("is-invalid");
+    }
+
+    if (!valido)
+        return;
 
     await fetch(`${api}/disciplina`, {
         method: "POST",
@@ -187,15 +259,16 @@ async function salvarDisciplina() {
             "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify({
-            nome,
-            cargaHoraria
+            nome: nome.value,
+            cargaHoraria: Number(cargaHoraria.value)
         })
     });
 
     modalDisciplina.hide();
 
     alert("Disciplina criada!");
-}
+} ("Disciplina criada!");
+
 
 // ========================
 // NOTAS
@@ -238,8 +311,26 @@ async function salvarNota() {
     const disciplinaId =
         Number(document.getElementById("disciplinaSelect").value);
 
-    const nota =
-        Number(document.getElementById("nota").value);
+    const notaInput =
+        document.getElementById("nota");
+
+    if (notaInput.value.trim() === "") {
+
+        notaInput.classList.add("is-invalid");
+
+        return;
+    }
+
+    notaInput.classList.remove("is-invalid");
+
+    const nota = Number(notaInput.value);
+
+    if (nota < 0 || nota > 10 || isNaN(nota)) {
+
+        notaInput.classList.add("is-invalid");
+
+        return;
+    }
 
     await fetch(`${api}/matricula/nota`, {
         method: "PUT",
@@ -261,7 +352,10 @@ async function salvarNota() {
     console.log("Aluno:", alunoId);
     console.log("Disciplina:", disciplinaId);
     console.log("Nota:", nota);
+
 }
+
+
 
 // ========================
 // VER NOTAS

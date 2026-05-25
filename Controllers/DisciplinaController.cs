@@ -9,7 +9,7 @@ using static System.Net.WebRequestMethods;
 
 namespace ProjetoEscola.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin,Professor")]
     [Route("api/[controller]")]
     [ApiController]
     public class DisciplinaController : ControllerBase
@@ -25,6 +25,7 @@ namespace ProjetoEscola.Controllers
         public async Task<IActionResult> Get()
             => Ok(await _service.ListarTodos());
 
+        [Authorize(Roles = "Admin,Professor")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] DisciplinaDTO dto)
         {
@@ -32,6 +33,7 @@ namespace ProjetoEscola.Controllers
             return Ok("Disciplina cadastrada.");
         }
 
+        [Authorize(Roles = "Admin,Professor")]
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] DisciplinaDTO dto)
         {
@@ -46,6 +48,7 @@ namespace ProjetoEscola.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin,Professor")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

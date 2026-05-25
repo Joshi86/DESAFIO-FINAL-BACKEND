@@ -148,6 +148,10 @@ namespace ProjetoEscola.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Senha")
                         .IsRequired()
                         .HasColumnType("longtext");

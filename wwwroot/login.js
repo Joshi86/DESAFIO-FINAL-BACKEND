@@ -50,39 +50,36 @@ function mostrarCadastro() {
 async function cadastrar() {
 
     const username =
-        document.getElementById("novoUsuario").value;
-
-    const senha =
-        document.getElementById("novaSenha").value;
-
-    const usernameInput =
         document.getElementById("novoUsuario");
 
-    const senhaInput =
+    const senha =
         document.getElementById("novaSenha");
+
+    const role =
+        document.getElementById("role").value;
 
     let valido = true;
 
-    if (username.trim() === "") {
+    if (username.value.trim() === "") {
 
-        usernameInput.classList.add("is-invalid");
+        username.classList.add("is-invalid");
 
         valido = false;
 
     } else {
 
-        usernameInput.classList.remove("is-invalid");
+        username.classList.remove("is-invalid");
     }
 
-    if (senha.trim() === "") {
+    if (senha.value.trim() === "") {
 
-        senhaInput.classList.add("is-invalid");
+        senha.classList.add("is-invalid");
 
         valido = false;
 
     } else {
 
-        senhaInput.classList.remove("is-invalid");
+        senha.classList.remove("is-invalid");
     }
 
     if (!valido)
@@ -91,13 +88,20 @@ async function cadastrar() {
     try {
 
         const res = await fetch(`${api}/auth/register`, {
+
             method: "POST",
+
             headers: {
                 "Content-Type": "application/json"
             },
+
             body: JSON.stringify({
-                username,
-                senha
+
+                username: username.value,
+
+                senha: senha.value,
+
+                role: role
             })
         });
 

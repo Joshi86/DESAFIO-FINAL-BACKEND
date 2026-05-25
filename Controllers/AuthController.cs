@@ -32,6 +32,7 @@ namespace ProjetoEscola.Controllers
             {
                 Username = dto.Username,
                 Senha = dto.Senha,
+                Role = dto.Role,
             };
 
             await _context.Usuarios.AddAsync(user);
@@ -56,9 +57,10 @@ namespace ProjetoEscola.Controllers
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
-                {
-            new Claim(ClaimTypes.Name, user.Username)
-        }),
+{
+    new Claim(ClaimTypes.Name, user.Username),
+    new Claim(ClaimTypes.Role, user.Role)
+}),
 
                 Expires = DateTime.UtcNow.AddHours(2),
 

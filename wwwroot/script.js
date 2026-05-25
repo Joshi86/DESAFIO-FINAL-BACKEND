@@ -3,8 +3,13 @@
 const token = localStorage.getItem("token");
 
 if (!token) {
-    window.location.href = "index.html";
+    window.location.href = "login.html";
 }
+
+const payload = JSON.parse(atob(token.split('.')[1]));
+
+const role =
+    payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
 
 let modal;
 let modalDisciplina;
@@ -21,8 +26,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     modalVerNotas = new bootstrap.Modal(document.getElementById('modalVerNotas'));
 
+    if (role !== "Admin") {
+
+        document.getElementById("btnNovoAluno")
+            .style.display = "none";
+    }
+
+    if (role === "Aluno") {
+
+        document.getElementById("btnDisciplina")
+            .style.display = "none";
+    }
+
     carregarAlunos();
 });
+
 
 // ========================
 // ALUNOS
@@ -44,37 +62,61 @@ async function carregarAlunos() {
 
     alunos.forEach(a => {
 
-        tabela.innerHTML += `
-            <tr>
-                <td>${a.id}</td>
-                <td>${a.nome}</td>
-                <td>${a.cpf}</td>
-                <td>${a.dataNascimento.split("T")[0]}</td>
+    let botoes = "";
 
-                <td>
-                    <button class="btn btn-warning btn-sm"
-                        onclick="editar(${a.id})">
-                        Editar
-                    </button>
+    // ADMIN
+    if (role === "Admin") {
 
-                    <button class="btn btn-danger btn-sm"
-                        onclick="deletar(${a.id})">
-                        Excluir
-                    </button>
+        botoes += `
+            <button class="btn btn-warning btn-sm"
+                onclick="editar(${a.id})">
+                Editar
+            </button>
 
-                    <button class="btn btn-success btn-sm"
-                        onclick="abrirNotas(${a.id})">
-                        Lançar Nota
-                    </button>
+            <button class="btn btn-danger btn-sm"
+                onclick="deletar(${a.id})">
+                Excluir
+            </button>
 
-                    <button class="btn btn-info btn-sm"
-                        onclick="verNotas(${a.id})">
-                        Ver Notas
-                    </button>
-                </td>
-            </tr>
+            <button class="btn btn-success btn-sm"
+                onclick="abrirNotas(${a.id})">
+                Lançar Nota
+            </button>
         `;
-    });
+    }
+
+    // PROFESSOR
+    if (role === "Professor") {
+
+        botoes += `
+            <button class="btn btn-success btn-sm"
+                onclick="abrirNotas(${a.id})">
+                Lançar Nota
+            </button>
+        `;
+    }
+
+    // TODOS
+    botoes += `
+        <button class="btn btn-info btn-sm"
+            onclick="verNotas(${a.id})">
+            Ver Notas
+        </button>
+    `;
+
+    tabela.innerHTML += `
+        <tr>
+            <td>${a.id}</td>
+            <td>${a.nome}</td>
+            <td>${a.cpf}</td>
+            <td>${a.dataNascimento.split("T")[0]}</td>
+
+            <td>
+                ${botoes}
+            </td>
+        </tr>
+    `;
+});
 }
 
 function abrirFormulario() {
@@ -398,5 +440,5 @@ function logout() {
 
     localStorage.removeItem("token");
 
-    window.location.href = "index.html";
+    window.location.href = "login.html";
 }

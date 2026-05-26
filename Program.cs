@@ -16,16 +16,16 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString =
+    builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<AppDbContext>(options =>
+{
     options.UseMySql(
-        builder.Configuration.GetConnectionString("DefaultConnection"),
-        ServerVersion.AutoDetect(
-            builder.Configuration.GetConnectionString("DefaultConnection")
-        )
-    )
-);
+        connectionString,
+        ServerVersion.AutoDetect(connectionString)
+    );
+});
 
 builder.Services.AddScoped<IAlunosRepository, AlunoRepository>();
 builder.Services.AddScoped<IAlunoService, AlunoService>();

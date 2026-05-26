@@ -12,7 +12,7 @@ const role =
     payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
 
 let modal;
-let modalDisciplina;
+
 let modalNota;
 let modalVerNotas;
 
@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     modal = new bootstrap.Modal(document.getElementById('modalAluno'));
 
-    modalDisciplina = new bootstrap.Modal(document.getElementById('modalDisciplina'));
 
     modalNota = new bootstrap.Modal(document.getElementById('modalNota'));
 
@@ -29,12 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (role !== "Admin") {
 
         document.getElementById("btnNovoAluno")
-            .style.display = "none";
-    }
-
-    if (role === "Aluno") {
-
-        document.getElementById("btnDisciplina")
             .style.display = "none";
     }
 
@@ -245,72 +238,6 @@ async function deletar(id) {
 
     carregarAlunos();
 }
-
-// ========================
-// DISCIPLINAS
-// ========================
-
-function abrirDisciplina() {
-
-    document.getElementById("disciplinaNome").value = "";
-
-    document.getElementById("cargaHoraria").value = "";
-
-    modalDisciplina.show();
-}
-
-async function salvarDisciplina() {
-
-    const nome =
-        document.getElementById("disciplinaNome");
-
-    const cargaHoraria =
-        document.getElementById("cargaHoraria");
-
-    let valido = true;
-
-    if (nome.value.trim() === "") {
-
-        nome.classList.add("is-invalid");
-
-        valido = false;
-
-    } else {
-
-        nome.classList.remove("is-invalid");
-    }
-
-    if (cargaHoraria.value.trim() === "") {
-
-        cargaHoraria.classList.add("is-invalid");
-
-        valido = false;
-
-    } else {
-
-        cargaHoraria.classList.remove("is-invalid");
-    }
-
-    if (!valido)
-        return;
-
-    await fetch(`${api}/disciplina`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-        },
-        body: JSON.stringify({
-            nome: nome.value,
-            cargaHoraria: Number(cargaHoraria.value)
-        })
-    });
-
-    modalDisciplina.hide();
-
-    alert("Disciplina criada!");
-}
-
 
 // ========================
 // NOTAS

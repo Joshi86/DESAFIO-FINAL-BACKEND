@@ -9,9 +9,9 @@ using static System.Net.WebRequestMethods;
 
 namespace ProjetoEscola.Controllers
 {
-    [Authorize(Roles = "Admin,Professor")]
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DisciplinaController : ControllerBase
     {
         private readonly IDisciplinaService _service;

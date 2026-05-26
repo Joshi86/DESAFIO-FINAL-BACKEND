@@ -58,6 +58,9 @@ async function cadastrar() {
     const role =
         document.getElementById("role").value;
 
+    const aceiteLgpd =
+        document.getElementById("aceiteLgpd");
+
     let valido = true;
 
     if (username.value.trim() === "") {
@@ -80,6 +83,17 @@ async function cadastrar() {
     } else {
 
         senha.classList.remove("is-invalid");
+    }
+
+    if (!aceiteLgpd.checked) {
+
+        aceiteLgpd.classList.add("is-invalid");
+
+        valido = false;
+
+    } else {
+
+        aceiteLgpd.classList.remove("is-invalid");
     }
 
     if (!valido)

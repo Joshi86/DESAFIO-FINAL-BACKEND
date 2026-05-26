@@ -5,34 +5,40 @@
     <title>Professores</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="bg-light">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar px-4">
 
-        <a class="navbar-brand" href="home.html">
-            🎓 Escola do Joshi
-        </a>
+        <div class="container-fluid">
 
-        <div class="navbar-nav">
-
-            <a class="nav-link active" href="alunos.html">
-                Alunos
+            <a class="navbar-brand fw-bold" href="home.html">
+                🎓 SchoolManager
             </a>
 
-            <a class="nav-link" href="professores.html">
-                Professores
-            </a>
+            <div class="navbar-nav">
 
-            <div class="ms-auto">
+                <a class="nav-link active" href="alunos.html">
+                    Alunos
+                </a>
 
-                <button class="btn btn-danger"
-                        onclick="logout()">
-                    Logout
-                </button>
+                <a class="nav-link" href="professores.html">
+                    Professores
+                </a>
+
+                <a class="nav-link" href="disciplinas.html">
+                    Disciplinas
+                </a>
 
             </div>
+
+            <button class="btn btn-danger ms-auto"
+                    onclick="logout()">
+                Logout
+            </button>
 
         </div>
 

@@ -1,4 +1,5 @@
 ﻿const api = "/api";
+
 const token = localStorage.getItem("token");
 
 if (!token) {

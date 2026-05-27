@@ -30,7 +30,10 @@ namespace ProjetoEscola.Services
             {
                 Nome = alunoDTO.Nome,
                 Cpf = alunoDTO.Cpf,
-                DataNascimento = alunoDTO.DataNascimento
+                DataNascimento = DateTime.SpecifyKind(
+    alunoDTO.DataNascimento,
+    DateTimeKind.Utc
+)
             };
 
             await _repository.Adicionar(aluno);
@@ -45,7 +48,10 @@ namespace ProjetoEscola.Services
 
             aluno.Nome = dto.Nome;
             aluno.Cpf = dto.Cpf;
-            aluno.DataNascimento = dto.DataNascimento;
+            aluno.DataNascimento = DateTime.SpecifyKind(
+    dto.DataNascimento,
+    DateTimeKind.Utc
+);
 
             await _repository.Atualizar(aluno);
         }

@@ -32,6 +32,8 @@ namespace ProjetoEscola.Controllers
                     .Select(n => new
                     {
                         id = n.Id,
+                        alunoId = n.AlunoId,
+                        disciplinaId = n.DisciplinaId,
                         aluno = n.Aluno.Nome,
                         disciplina = n.Disciplina.Nome,
                         nota = n.NotaValor
@@ -85,8 +87,28 @@ namespace ProjetoEscola.Controllers
                 return Ok(nota);
             }
 
-            // DELETE: api/notas/1
-            [HttpDelete("{id}")]
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, [FromBody] NotaDTO dto)
+        {
+            var nota = _context.Notas.FirstOrDefault(n => n.Id == id);
+
+            if (nota == null)
+                return NotFound();
+
+            if (dto.Nota < 0 || dto.Nota > 10)
+                return BadRequest("A nota deve estar entre 0 e 10.");
+
+            nota.AlunoId = dto.AlunoId;
+            nota.DisciplinaId = dto.DisciplinaId;
+            nota.NotaValor = dto.Nota;
+
+            _context.SaveChanges();
+
+            return Ok(nota);
+        }
+
+        // DELETE: api/notas/1
+        [HttpDelete("{id}")]
             public IActionResult Delete(int id)
             {
                 var nota = _context.Notas.FirstOrDefault(n => n.Id == id);

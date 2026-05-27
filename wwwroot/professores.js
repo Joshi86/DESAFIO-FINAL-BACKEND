@@ -38,6 +38,13 @@ async function carregarProfessores() {
     });
 }
 
+function abrirLoading() {
+
+    document
+        .getElementById("loadingScreen")
+        .classList.remove("d-none");
+}
+
 function logout() {
 
     localStorage.removeItem("token");

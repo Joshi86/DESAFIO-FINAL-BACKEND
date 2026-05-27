@@ -28,6 +28,12 @@ function esconderParaAluno(id) {
     }
 }
 
+function abrirLoading() {
+
+    document
+        .getElementById("loadingScreen")
+        .classList.remove("d-none");
+}
 
 // ========================
 // ALUNOS

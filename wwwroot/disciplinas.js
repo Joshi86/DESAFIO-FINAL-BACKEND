@@ -31,6 +31,13 @@ document.addEventListener("DOMContentLoaded", () => {
     carregarDisciplinas();
 });
 
+function abrirLoading() {
+
+    document
+        .getElementById("loadingScreen")
+        .classList.remove("d-none");
+}
+
 async function carregarDisciplinas() {
 
     const res = await fetch(`${api}/disciplina`, {

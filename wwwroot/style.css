@@ -205,3 +205,21 @@ h1, h2, h3 {
             background-color: #198754;
             border-color: #198754;
         }
+
+/* ===================
+   LOADING SCREEN
+===================== */
+
+.loading-screen {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.d-none {
+    display: none !important;
+}

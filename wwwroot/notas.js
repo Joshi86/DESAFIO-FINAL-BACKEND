@@ -32,6 +32,12 @@ document.addEventListener("DOMContentLoaded", () => {
     carregarDisciplinas();
 });
 
+function abrirLoading() {
+
+    document
+        .getElementById("loadingScreen")
+        .classList.remove("d-none");
+}
 
 // ========================
 // LISTAR NOTAS

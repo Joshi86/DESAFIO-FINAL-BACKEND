@@ -43,6 +43,13 @@ document.addEventListener("DOMContentLoaded", () => {
     modalCadastro = new bootstrap.Modal(document.getElementById('modalCadastro'));
 });
 
+function abrirLoading() {
+
+    document
+        .getElementById("loadingScreen")
+        .classList.remove("d-none");
+}
+
 function mostrarCadastro() {
     modalCadastro.show();
 }

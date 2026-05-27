@@ -74,7 +74,7 @@ namespace ProjetoEscola.Controllers
 
         // POST
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Professor")]
         [HttpPost]
         public async Task<IActionResult> Post(AlunoDTO alunoDTO)
         {
@@ -91,7 +91,7 @@ namespace ProjetoEscola.Controllers
 
         // PUT
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Professor")]
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] AlunoDTO dto)
         {
@@ -108,7 +108,7 @@ namespace ProjetoEscola.Controllers
 
         // DELETE
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Professor")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

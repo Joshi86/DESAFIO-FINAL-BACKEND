@@ -1,147 +1,76 @@
-#  Sistema Escolar Fullstack
+1. Descrição do Projeto
 
-Sistema escolar fullstack desenvolvido com ASP.NET Core, MySQL, JavaScript e Bootstrap.
+O SchoolManager é uma aplicação web para gestão escolar desenvolvida para controle de alunos, professores, disciplinas e notas. O sistema permite operações básicas de CRUD (criação, leitura, atualização e exclusão), além do lançamento e consulta de notas associadas a alunos e disciplinas.
 
-O sistema permite:
+A arquitetura é baseada em uma API backend em .NET, consumida por uma interface web estática (HTML, CSS e JavaScript), com persistência de dados em banco PostgreSQL hospedado no Supabase.
 
-- Cadastro de usuários
-- Login com autenticação JWT
-- Cadastro de alunos
-- Cadastro de disciplinas
-- Lançamento de notas
-- Visualização de notas
-- CRUD completo de alunos
-- Integração frontend + backend
-- Persistência de dados no MySQL
+2. Tecnologias Utilizadas
+   
+Linguagem:
+C#
+JavaScript
+HTML5 / CSS3
+Framework:
+ASP.NET Core (Web API)
+Entity Framework Core
+Bootstrap 5
+Banco de Dados:
+PostgreSQL (Supabase)
+Segurança:
+Autenticação via JWT (JSON Web Token)
+Controle de sessão via localStorage no frontend
+Validação de dados no backend e frontend
+Documentação de API:
+Swagger (OpenAPI)
 
----
+3. Instruções de Execução
 
-#  Tecnologias Utilizadas
+Para rodar o projeto localmente, siga os passos abaixo:
 
-## Backend
-- ASP.NET Core
-- Entity Framework Core
-- JWT Authentication
-- Swagger
-- MySQL
+Clonar o repositório do projeto
 
-## Frontend
-- HTML5
-- CSS3
-- JavaScript
-- Bootstrap 5
+Restaurar as dependências do backend (.NET):
 
----
+dotnet restore
+Configurar a connection string do banco de dados no arquivo appsettings.json
 
-#  Autenticação
+Aplicar as migrations no banco de dados:
 
-O sistema utiliza autenticação JWT.
+dotnet ef database update
 
-Após realizar login:
-- o backend gera um token JWT;
-- o token é salvo no localStorage;
-- as rotas protegidas utilizam Authorization Bearer Token.
+Executar a aplicação:
 
-O cadastro e login dos usuários são armazenados no banco de dados MySQL.
-
----
-
-#  Banco de Dados
-
-Banco utilizado:
-
-- MySQL
-
-Tabelas principais:
-- Alunos
-- Disciplinas
-- Matrículas
-- Usuários
-
----
-
-#  Funcionalidades
-
-## Alunos
-- Criar aluno
-- Editar aluno
-- Excluir aluno
-- Listar alunos
-
-## Disciplinas
-- Criar disciplina
-
-## Notas
-- Lançar notas
-- Ver notas dos alunos
-
-## Usuários
-- Cadastro
-- Login
-- JWT
-
----
-
-#  Validações
-
-O sistema possui validações no frontend para:
-- CPF inválido
-- Nota maior que 10
-- Campos vazios
-- Login inválido
-- Cadastro inválido
-
----
-
-# ▶️ Como Executar
-
-## 1. Clonar o projeto
-
-```bash
-git clone https://github.com/Joshi86/SISTEMA-ESCOLAR-FULLSTACK
-```
-
-## 2. Abrir no Visual Studio
-
-Abra o arquivo `.sln`
-
----
-
-## 3. Configurar o banco de dados (Se o seu nome for Marcelo e você for monitor de uma turma aí não precisa fazer isso, já está configurado)
-
-Edite o `appsettings.json`:
-
-```json
-"ConnectionStrings": {
-  "ConexaoPadrao": "Server=localhost;Database=AlunosDB;Uid=root;Pwd=SUA_SENHA;"
-}
-```
-
----
-
-## 4. Executar migrations
-
-```bash
-Update-Database
-```
-
----
-
-## 5. Rodar o projeto
-
-Pressione:
-
-```txt
-F5
-```
-
-ou:
-
-```bash
 dotnet run
-```
+Abrir o frontend (HTML) em um navegador ou via Live Server (VS Code)
 
----
+4. Endpoints da API
+
+Abaixo estão os principais endpoints disponíveis no sistema:
+
+Alunos
+GET /api/alunos
+Retorna todos os alunos cadastrados.
+GET /api/alunos/{id}
+Retorna um aluno específico.
+POST /api/alunos
+Cadastra um novo aluno.
+PUT /api/alunos/{id}
+Atualiza os dados de um aluno.
+DELETE /api/alunos/{id}
+Remove um aluno.
+Professores
+GET /api/professores
+Lista todos os professores.
+Disciplinas
+GET /api/disciplinas
+Lista todas as disciplinas.
+POST /api/disciplinas
+Cadastra uma nova disciplina.
+Notas
+GET /api/notas/{alunoId}
+Lista todas as notas de um aluno.
+POST /api/notas
+Lança uma nota para um aluno em uma disciplina.
 
 # 👨‍💻 Autor
 

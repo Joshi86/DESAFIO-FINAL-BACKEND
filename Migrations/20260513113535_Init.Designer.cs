@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjetoEscola.Data;
 
@@ -11,9 +12,11 @@ using ProjetoEscola.Data;
 namespace ProjetoEscola.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260513113535_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,32 +95,6 @@ namespace ProjetoEscola.Migrations
                     b.ToTable("Matriculas");
                 });
 
-            modelBuilder.Entity("ProjetoEscola.Models.Nota", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AlunoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DisciplinaId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("NotaValor")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AlunoId");
-
-                    b.HasIndex("DisciplinaId");
-
-                    b.ToTable("Notas");
-                });
-
             modelBuilder.Entity("ProjetoEscola.Models.Professor", b =>
                 {
                     b.Property<int>("ID")
@@ -174,10 +151,6 @@ namespace ProjetoEscola.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<string>("Senha")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -201,25 +174,6 @@ namespace ProjetoEscola.Migrations
 
                     b.HasOne("ProjetoEscola.Models.Disciplina", "Disciplina")
                         .WithMany("Matriculas")
-                        .HasForeignKey("DisciplinaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Aluno");
-
-                    b.Navigation("Disciplina");
-                });
-
-            modelBuilder.Entity("ProjetoEscola.Models.Nota", b =>
-                {
-                    b.HasOne("ProjetoEscola.Models.Aluno", "Aluno")
-                        .WithMany()
-                        .HasForeignKey("AlunoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProjetoEscola.Models.Disciplina", "Disciplina")
-                        .WithMany()
                         .HasForeignKey("DisciplinaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

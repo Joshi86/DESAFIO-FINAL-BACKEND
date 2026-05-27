@@ -14,6 +14,7 @@ namespace ProjetoEscola.Data
         public DbSet<Aluno> Alunos { get; set; }
         public DbSet<Professor> Professores { get; set; }
         public DbSet<Disciplina> Disciplinas { get; set; }
+        public DbSet<Nota> Notas { get; set; }
 
 
         public DbSet<Turma> Turmas { get; set; }
@@ -42,6 +43,19 @@ namespace ProjetoEscola.Data
                 .HasOne(t => t.Disciplina)
                 .WithMany(d => d.Turmas)
                 .HasForeignKey(t => t.DisciplinaId);
+
+
+            modelBuilder.Entity<Nota>()
+                .HasOne(n => n.Aluno)
+                .WithMany()
+                .HasForeignKey(n => n.AlunoId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Nota>()
+                .HasOne(n => n.Disciplina)
+                .WithMany()
+                .HasForeignKey(n => n.DisciplinaId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -13,31 +13,35 @@
 
 <body class="home-body">
 
-    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar px-4">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
 
-        <div class="container-fluid">
+        <a class="navbar-brand" href="home.html">
+            🎓 SchoolManager
+        </a>
 
-            <a class="navbar-brand fw-bold" href="home.html">
-                🎓 SchoolManager
+        <div class="navbar-nav">
+
+            <a class="nav-link active" href="alunos.html">
+                Alunos
             </a>
 
-            <div class="navbar-nav">
+            <a class="nav-link" href="professores.html">
+                Professores
+            </a>
 
-                <a class="nav-link active" href="alunos.html">
-                    Alunos
-                </a>
+            <a class="nav-link active" href="disciplinas.html">
+                Disciplinas
+            </a>
 
-                <a class="nav-link" href="professores.html">
-                    Professores
-                </a>
+            <a class="nav-link active" href="notas.html">
+                Notas
+            </a>
 
-                <a class="nav-link" href="disciplinas.html">
-                    Disciplinas
-                </a>
+        </div>
 
-            </div>
+        <div class="ms-auto">
 
-            <button class="btn btn-danger ms-auto"
+            <button class="btn btn-danger"
                     onclick="logout()">
                 Logout
             </button>
@@ -69,7 +73,7 @@
 
                     <div class="card-body p-4">
 
-                        <div class="card-icon bg-primary-subtle">
+                        <div class="card-icon bg-primary-subtle d-flex align-items-center justify-content-center">
 
                             <img src="img/img1.png"
                                  class="icone-card">

@@ -1,64 +1,24 @@
-﻿.form-check-custom {
-    border: 1px solid #ced4da;
-    transition: all 0.25s ease;
+﻿/* =========================
+   BASE
+========================= */
+
+html, body {
+    height: 100%;
 }
-
-.form-check-custom:has(input:checked) {
-        border-color: #198754;
-        background-color: #f0fff4;
-        box-shadow: 0 0 0 0.15rem rgba(25, 135, 84, 0.15);
-    }
-
-.form-check-input {
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    border: 2px solid #adb5bd;
-    border-radius: 6px;
-    background-color: white;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    margin-top: 2px;
-    flex-shrink: 0;
-}
-
-    .form-check-input:hover {
-        border-color: #198754;
-    }
-
-    .form-check-input:checked {
-        background-color: #198754;
-        border-color: #198754;
-        position: relative;
-    }
-
-        .form-check-input:checked::after {
-            content: "";
-            color: white;
-            font-size: 13px;
-            font-weight: bold;
-            position: absolute;
-            left: 4px;
-            top: -1px;
-        }
 
 body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     font-family: "Segoe UI", sans-serif;
-}
-
-.home-body {
     background: #f4f6f9;
-}
-
-body {
-    animation: fadePage 0.6s ease;
+    animation: fadePage 0.5s ease;
 }
 
 @keyframes fadePage {
-
     from {
         opacity: 0;
-        transform: translateY(0px);
+        transform: translateY(4px);
     }
 
     to {
@@ -67,45 +27,181 @@ body {
     }
 }
 
-.custom-navbar {
-    background: #1f2937;
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
     box-shadow: 0 2px 10px rgba(0,0,0,0.08);
 }
 
-.hero-section {
-    background: white;
-    padding: 50px;
-    border-radius: 20px;
+.custom-navbar {
+    background: #1f2937;
+}
+
+/* =========================
+   TIPOGRAFIA
+========================= */
+
+h1, h2, h3 {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* =========================
+   CARD SYSTEM
+========================= */
+
+.card {
+    border-radius: 12px;
+    overflow: hidden;
     box-shadow: 0 4px 18px rgba(0,0,0,0.05);
 }
 
-    .hero-section h1 {
-        font-size: 2.5rem;
-    }
-
-.home-card {
-    border-radius: 20px;
-    transition: all 0.25s ease;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.05);
-}
-
-    .home-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    }
-
-.card-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
+.card-body {
+    padding: 24px;
 }
 
 .icone-card {
     width: 48px;
-    height: 48px;
 }
 
+.card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 380px;
+    border-radius: 18px;
+}
+
+@media (max-width: 576px) {
+    .login-card {
+        max-width: 92%;
+        padding: 20px;
+    }
+}
+
+ /* =========================
+   TABLE SYSTEM
+========================= */
+
+    .table {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .table thead {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .table tbody tr {
+            transition: 0.2s ease;
+        }
+
+            .table tbody tr:hover {
+                background-color: #eef3f8;
+            }
+    /* =========================
+   BUTTON SYSTEM
+========================= */
+
+    .btn {
+        border-radius: 8px;
+        font-weight: 500;
+    }
+    /* botão principal genérico */
+    .btn-primary {
+        padding: 8px 16px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    /* =========================
+   FORMS
+========================= */
+
+    .form-control {
+        border-radius: 8px;
+        padding: 10px;
+        border: 1px solid #dcdfe3;
+    }
+
+        .form-control:focus {
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 0.2rem rgba(74,144,226,0.15);
+        }
+
+    .invalid-feedback {
+        font-size: 12px;
+    }
+    /* =========================
+   MODALS
+========================= */
+
+    .modal-content {
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .modal-header {
+        background: #f8f9fa;
+        border-bottom: 1px solid #eee;
+    }
+    /* =========================
+   HOME / DASHBOARD
+========================= */
+
+    .home-body {
+        background: #f4f6f9;
+    }
+
+    .hero-section {
+        background: white;
+        padding: 50px;
+        border-radius: 20px;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+    }
+
+    .home-card {
+        border-radius: 20px;
+        transition: 0.25s ease;
+    }
+
+        .home-card:hover {
+            transform: translateY(-6px);
+        }
+    /* ===================
+   CHECKBOX CUSTOM
+===================== */
+
+    .form-check-custom {
+        border: 1px solid #ced4da;
+        transition: all 0.2s ease;
+    }
+
+        .form-check-custom:has(input:checked) {
+            border-color: #198754;
+            background-color: #f0fff4;
+        }
+
+    .form-check-input {
+        width: 18px;
+        height: 18px;
+        border: 2px solid #adb5bd;
+        border-radius: 5px;
+        appearance: none;
+        cursor: pointer;
+        background: white;
+    }
+
+        .form-check-input:checked {
+            background-color: #198754;
+            border-color: #198754;
+        }

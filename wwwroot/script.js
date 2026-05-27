@@ -1,38 +1,33 @@
-﻿const api = "/api";
+﻿const api = "https://localhost:7122/api";
 
 const token = localStorage.getItem("token");
+
+const payload = JSON.parse(atob(token.split('.')[1]));
+
+const role = payload.role;
+
+console.log(role);
 
 if (!token) {
     window.location.href = "login.html";
 }
 
-const payload = JSON.parse(atob(token.split('.')[1]));
-
-const role =
-    payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-
-let modal;
-
-let modalNota;
-let modalVerNotas;
-
 document.addEventListener("DOMContentLoaded", () => {
 
-    modal = new bootstrap.Modal(document.getElementById('modalAluno'));
-
-
-    modalNota = new bootstrap.Modal(document.getElementById('modalNota'));
-
-    modalVerNotas = new bootstrap.Modal(document.getElementById('modalVerNotas'));
-
-    if (role !== "Admin") {
-
-        document.getElementById("btnNovoAluno")
-            .style.display = "none";
-    }
-
+    esconderParaAluno("btnNovoAluno");
     carregarAlunos();
 });
+
+function esconderParaAluno(id) {
+
+    const el = document.getElementById(id);
+
+    if (!el) return;
+
+    if (role === "Aluno") {
+        el.style.display = "none";
+    }
+}
 
 
 // ========================
@@ -49,70 +44,52 @@ async function carregarAlunos() {
 
     const alunos = await res.json();
 
+    console.log(alunos);
+
     const tabela = document.getElementById("tabelaAlunos");
 
     tabela.innerHTML = "";
 
     alunos.forEach(a => {
 
-    let botoes = "";
+        let botoes = "";
 
-    // ADMIN
-    if (role === "Admin") {
+        if (role === "Admin" || role === "Professor") {
 
-        botoes += `
-            <button class="btn btn-warning btn-sm"
-                onclick="editar(${a.id})">
-                Editar
-            </button>
+            botoes += `
+                <button class="btn btn-warning btn-sm"
+                    onclick="editar(${a.id})">
+                    Editar
+                </button>
 
-            <button class="btn btn-danger btn-sm"
-                onclick="deletar(${a.id})">
-                Excluir
-            </button>
+                <button class="btn btn-danger btn-sm"
+                    onclick="deletar(${a.id})">
+                    Excluir
+                </button>
+            `;
+        }
 
-            <button class="btn btn-success btn-sm"
-                onclick="abrirNotas(${a.id})">
-                Lançar Nota
-            </button>
+        tabela.innerHTML += `
+            <tr>
+                <td>${a.id}</td>
+                <td>${a.nome}</td>
+                <td>${a.cpf}</td>
+                <td>${a.dataNascimento.split("T")[0]}</td>
+
+                <td>
+                    ${botoes}
+                </td>
+            </tr>
         `;
-    }
-
-    // PROFESSOR
-    if (role === "Professor") {
-
-        botoes += `
-            <button class="btn btn-success btn-sm"
-                onclick="abrirNotas(${a.id})">
-                Lançar Nota
-            </button>
-        `;
-    }
-
-    // TODOS
-    botoes += `
-        <button class="btn btn-info btn-sm"
-            onclick="verNotas(${a.id})">
-            Ver Notas
-        </button>
-    `;
-
-    tabela.innerHTML += `
-        <tr>
-            <td>${a.id}</td>
-            <td>${a.nome}</td>
-            <td>${a.cpf}</td>
-            <td>${a.dataNascimento.split("T")[0]}</td>
-
-            <td>
-                ${botoes}
-            </td>
-        </tr>
-    `;
-});
+    });
 }
-
 function abrirFormulario() {
+
+    const modalElement =
+        document.getElementById('modalAluno');
+
+    const modal =
+        new bootstrap.Modal(modalElement);
 
     document.getElementById("alunoId").value = "";
     document.getElementById("nome").value = "";
@@ -219,6 +196,12 @@ async function salvarAluno() {
         });
     }
 
+    const modalElement =
+        document.getElementById('modalAluno');
+
+    const modal =
+        bootstrap.Modal.getInstance(modalElement);
+
     modal.hide();
 
     carregarAlunos();
@@ -237,126 +220,6 @@ async function deletar(id) {
     });
 
     carregarAlunos();
-}
-
-// ========================
-// NOTAS
-// ========================
-
-async function abrirNotas(alunoId) {
-
-    document.getElementById("alunoNotaId").value = alunoId;
-
-    const res = await fetch(`${api}/disciplina`, {
-        headers: {
-            "Authorization": `Bearer ${token}`
-        }
-    });
-
-    const disciplinas = await res.json();
-
-    const select =
-        document.getElementById("disciplinaSelect");
-
-    select.innerHTML = "";
-
-    disciplinas.forEach(d => {
-
-        select.innerHTML += `
-            <option value="${d.id}">
-                ${d.nome}
-            </option>
-        `;
-    });
-
-    modalNota.show();
-}
-
-async function salvarNota() {
-
-    const alunoId =
-        Number(document.getElementById("alunoNotaId").value);
-
-    const disciplinaId =
-        Number(document.getElementById("disciplinaSelect").value);
-
-    const notaInput =
-        document.getElementById("nota");
-
-    if (notaInput.value.trim() === "") {
-
-        notaInput.classList.add("is-invalid");
-
-        return;
-    }
-
-    notaInput.classList.remove("is-invalid");
-
-    const nota = Number(notaInput.value);
-
-    if (nota < 0 || nota > 10 || isNaN(nota)) {
-
-        notaInput.classList.add("is-invalid");
-
-        return;
-    }
-
-    await fetch(`${api}/matricula/nota`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-        },
-        body: JSON.stringify({
-            alunoId,
-            disciplinaId,
-            nota
-        })
-    });
-
-    modalNota.hide();
-
-    alert("Nota lançada!");
-
-    console.log("Aluno:", alunoId);
-    console.log("Disciplina:", disciplinaId);
-    console.log("Nota:", nota);
-
-}
-
-
-
-// ========================
-// VER NOTAS
-// ========================
-
-async function verNotas(alunoId) {
-
-    const res = await fetch(`${api}/alunos/${alunoId}/notas`, {
-        headers: {
-            "Authorization": `Bearer ${token}`
-        }
-    });
-
-    const notas = await res.json();
-
-    const tabela =
-        document.getElementById("tabelaNotas");
-
-    tabela.innerHTML = "";
-
-    notas.forEach(n => {
-
-        tabela.innerHTML += `
-            <tr>
-                <td>${n.disciplina}</td>
-                <td>${n.nota}</td>
-                <td>${n.situacao}</td>
-            </tr>
-        `;
-    });
-
-    modalVerNotas.show();
 }
 
 // ========================

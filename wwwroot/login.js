@@ -1,4 +1,4 @@
-const api = "/api";
+const api = "https://localhost:7122/api";
 
 async function login() {
 

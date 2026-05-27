@@ -31,6 +31,10 @@
                 Disciplinas
             </a>
 
+            <a class="nav-link active" href="notas.html">
+                Notas
+            </a>
+
         </div>
 
         <div class="ms-auto">
@@ -46,36 +50,39 @@
 
     <div class="container py-5">
 
-        <div class="d-flex justify-content-between align-items-center mb-4">
-
-            <h2>Disciplinas</h2>
-
-            <button id="btnNovaDisciplina"
-                    class="btn btn-primary"
-                    onclick="abrirDisciplina()">
-                Nova Disciplina
-            </button>
-
-        </div>
-
         <div class="card shadow border-0">
 
             <div class="card-body">
 
-                <table class="table table-hover">
+                <div class="d-flex justify-content-between align-items-center mb-4">
 
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nome</th>
-                            <th>Carga Horária</th>
-                        </tr>
-                    </thead>
+                    <h2 class="mb-0">Disciplinas</h2>
 
-                    <tbody id="tabelaDisciplinas">
-                    </tbody>
+                    <button id="btnNovaDisciplina"
+                            class="btn btn-primary"
+                            onclick="abrirDisciplina()">
+                        Nova Disciplina
+                    </button>
 
-                </table>
+                </div>
+
+                <div class="table-responsive">
+
+                    <table class="table table-hover align-middle">
+
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Carga Horária</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tabelaDisciplinas"></tbody>
+
+                    </table>
+
+                </div>
 
             </div>
 

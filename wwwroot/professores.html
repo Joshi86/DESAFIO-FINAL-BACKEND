@@ -33,6 +33,10 @@
                     Disciplinas
                 </a>
 
+                <a class="nav-link active" href="notas.html">
+                    Notas
+                </a>
+
             </div>
 
             <button class="btn btn-danger ms-auto"
@@ -46,30 +50,33 @@
 
     <div class="container py-5">
 
-        <div class="d-flex justify-content-between align-items-center mb-4">
-
-            <h2>Lista de Professores</h2>
-
-        </div>
-
         <div class="card shadow border-0">
 
             <div class="card-body">
 
-                <table class="table table-hover">
+                <div class="d-flex justify-content-between align-items-center mb-4">
 
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Usuário</th>
-                            <th>Tipo</th>
-                        </tr>
-                    </thead>
+                    <h2 class="mb-0">Professores</h2>
 
-                    <tbody id="tabelaProfessores">
-                    </tbody>
+                </div>
 
-                </table>
+                <div class="table-responsive">
+
+                    <table class="table table-hover align-middle">
+
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Usuário</th>
+                                <th>Tipo</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tabelaProfessores"></tbody>
+
+                    </table>
+
+                </div>
 
             </div>
 

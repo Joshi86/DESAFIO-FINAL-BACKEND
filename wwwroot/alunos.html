@@ -10,7 +10,7 @@
 </head>
 
 
-<body style="background-color: #f4f6f9;">
+<body class="bg-light">
 
     <!-- LOADING -->
     <div id="loadingScreen">
@@ -22,38 +22,53 @@
 
     </div>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+    <nav class="navbar navbar-expand-lg custom-navbar">
 
-        <a class="navbar-brand" href="home.html">
-            🎓 SchoolManager
-        </a>
+        <div class="container">
 
-        <div class="navbar-nav">
-
-            <a class="nav-link active" href="alunos.html">
-                Alunos
+            <a class="navbar-brand fw-bold" href="home.html">
+                🎓 SchoolManager
             </a>
 
-            <a class="nav-link" href="professores.html">
-                Professores
-            </a>
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav">
 
-            <a class="nav-link active" href="disciplinas.html">
-                Disciplinas
-            </a>
+                <span class="navbar-toggler-icon"></span>
 
-            <a class="nav-link active" href="notas.html">
-                Notas
-            </a>
-
-        </div>
-
-        <div class="ms-auto">
-
-            <button class="btn btn-danger"
-                    onclick="logout()">
-                Logout
             </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+
+                <div class="navbar-nav mx-auto">
+
+                    <a class="nav-link active" href="alunos.html">
+                        Alunos
+                    </a>
+
+                    <a class="nav-link" href="professores.html">
+                        Professores
+                    </a>
+
+                    <a class="nav-link" href="disciplinas.html">
+                        Disciplinas
+                    </a>
+
+                    <a class="nav-link" href="notas.html">
+                        Notas
+                    </a>
+
+                </div>
+
+                <button class="btn btn-danger"
+                        onclick="logout()">
+
+                    Logout
+
+                </button>
+
+            </div>
 
         </div>
 

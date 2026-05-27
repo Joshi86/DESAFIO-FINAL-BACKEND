@@ -25,6 +25,12 @@ namespace ProjetoEscola.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO dto)
         {
+            if (!dto.Email.EndsWith("@gmail.com"))
+                throw new Exception("Email inválido.");
+
+            if (dto.Senha.Length < 6)
+                throw new Exception("A senha deve ter no mínimo 6 caracteres.");
+
             if (_context.Usuarios.Any(u => u.Username == dto.Username))
                 return BadRequest("Usuário já existe");
 
@@ -33,6 +39,7 @@ namespace ProjetoEscola.Controllers
                 Username = dto.Username,
                 Senha = dto.Senha,
                 Role = dto.Role,
+                Email = dto.Email
             };
 
             await _context.Usuarios.AddAsync(user);

@@ -72,6 +72,9 @@ async function cadastrar() {
     const username =
         document.getElementById("novoUsuario");
 
+    const email =
+        document.getElementById("novoEmail");
+
     const senha =
         document.getElementById("novaSenha");
 
@@ -82,6 +85,8 @@ async function cadastrar() {
         document.getElementById("aceiteLgpd");
 
     let valido = true;
+
+    // USERNAME
 
     if (username.value.trim() === "") {
 
@@ -94,7 +99,24 @@ async function cadastrar() {
         username.classList.remove("is-invalid");
     }
 
-    if (senha.value.trim() === "") {
+    // EMAIL
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+
+    if (!emailRegex.test(email.value.trim())) {
+
+        email.classList.add("is-invalid");
+
+        valido = false;
+
+    } else {
+
+        email.classList.remove("is-invalid");
+    }
+
+    // SENHA
+
+    if (senha.value.trim().length < 6) {
 
         senha.classList.add("is-invalid");
 
@@ -104,6 +126,8 @@ async function cadastrar() {
 
         senha.classList.remove("is-invalid");
     }
+
+    // LGPD
 
     if (!aceiteLgpd.checked) {
 
@@ -121,6 +145,8 @@ async function cadastrar() {
 
     try {
 
+        mostrarLoading();
+
         const res = await fetch(`${api}/auth/register`, {
 
             method: "POST",
@@ -132,6 +158,8 @@ async function cadastrar() {
             body: JSON.stringify({
 
                 username: username.value,
+
+                email: email.value,
 
                 senha: senha.value,
 
@@ -153,5 +181,9 @@ async function cadastrar() {
     } catch (e) {
 
         alert(e.message);
+
+    } finally {
+
+        esconderLoading();
     }
 }

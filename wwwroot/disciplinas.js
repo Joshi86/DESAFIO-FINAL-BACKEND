@@ -31,11 +31,18 @@ document.addEventListener("DOMContentLoaded", () => {
     carregarDisciplinas();
 });
 
-function abrirLoading() {
+function mostrarLoading() {
 
     document
         .getElementById("loadingScreen")
-        .classList.remove("d-none");
+        .classList.remove("hidden");
+}
+
+function esconderLoading() {
+
+    document
+        .getElementById("loadingScreen")
+        .classList.add("hidden");
 }
 
 async function carregarDisciplinas() {

@@ -40,14 +40,27 @@ async function login() {
 let modalCadastro;
 
 document.addEventListener("DOMContentLoaded", () => {
+    mostrarLoading();
+
     modalCadastro = new bootstrap.Modal(document.getElementById('modalCadastro'));
+
+    setTimeout(() => {
+        esconderLoading();
+    }, 700);
 });
 
-function abrirLoading() {
+function mostrarLoading() {
 
     document
         .getElementById("loadingScreen")
-        .classList.remove("d-none");
+        .classList.remove("hidden");
+}
+
+function esconderLoading() {
+
+    document
+        .getElementById("loadingScreen")
+        .classList.add("hidden");
 }
 
 function mostrarCadastro() {

@@ -10,7 +10,22 @@ let modalNota;
 
 let editandoId = null;
 
+function mostrarLoading() {
+
+    document
+        .getElementById("loadingScreen")
+        .classList.remove("hidden");
+}
+
+function esconderLoading() {
+
+    document
+        .getElementById("loadingScreen")
+        .classList.add("hidden");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+    mostrarLoading();
 
     modalNota = new bootstrap.Modal(
         document.getElementById("modalNota")
@@ -30,6 +45,10 @@ document.addEventListener("DOMContentLoaded", () => {
     carregarNotas();
     carregarAlunos();
     carregarDisciplinas();
+
+    setTimeout(() => {
+        esconderLoading();
+    }, 700);
 });
 
 function abrirLoading() {

@@ -38,11 +38,18 @@ async function carregarProfessores() {
     });
 }
 
-function abrirLoading() {
+function mostrarLoading() {
 
     document
         .getElementById("loadingScreen")
-        .classList.remove("d-none");
+        .classList.remove("hidden");
+}
+
+function esconderLoading() {
+
+    document
+        .getElementById("loadingScreen")
+        .classList.add("hidden");
 }
 
 function logout() {

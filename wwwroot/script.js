@@ -12,9 +12,14 @@ if (!token) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    mostrarLoading();
 
     esconderParaAluno("btnNovoAluno");
     carregarAlunos();
+
+    setTimeout(() => {
+        esconderLoading();
+    }, 700);
 });
 
 function esconderParaAluno(id) {
@@ -28,13 +33,19 @@ function esconderParaAluno(id) {
     }
 }
 
-function abrirLoading() {
+function mostrarLoading() {
 
     document
         .getElementById("loadingScreen")
-        .classList.remove("d-none");
+        .classList.remove("hidden");
 }
 
+function esconderLoading() {
+
+    document
+        .getElementById("loadingScreen")
+        .classList.add("hidden");
+}
 // ========================
 // ALUNOS
 // ========================

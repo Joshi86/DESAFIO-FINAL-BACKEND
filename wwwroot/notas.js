@@ -98,7 +98,7 @@ async function carregarNotas() {
                         </button>
 
                         <button 
-                            class="btn btn-danger btn-sm btn-acoes"
+                       <button class="btn btn-warning btn-sm"
                             onclick="deletarNota(${n.id})">
                             Excluir
                         </button>

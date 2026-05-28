@@ -1,3 +1,5 @@
+https://desafio-final-backend-1.onrender.com/login.html
+
 1. Descrição do Projeto
 
 O SchoolManager é uma aplicação web para gestão escolar desenvolvida para controle de alunos, professores, disciplinas e notas. O sistema permite operações básicas de CRUD (criação, leitura, atualização e exclusão), além do lançamento e consulta de notas associadas a alunos e disciplinas.

@@ -36,7 +36,6 @@ namespace ProjetoEscola.Controllers
                 Username = dto.Username,
                 Senha = dto.Senha,
                 Role = dto.Role,
-                Email = dto.Email
             };
 
             await _context.Usuarios.AddAsync(user);

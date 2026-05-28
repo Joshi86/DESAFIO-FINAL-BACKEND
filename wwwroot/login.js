@@ -72,9 +72,6 @@ async function cadastrar() {
     const username =
         document.getElementById("novoUsuario");
 
-    const email =
-        document.getElementById("novoEmail");
-
     const senha =
         document.getElementById("novaSenha");
 
@@ -97,21 +94,6 @@ async function cadastrar() {
     } else {
 
         username.classList.remove("is-invalid");
-    }
-
-    // EMAIL
-
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
-
-    if (!emailRegex.test(email.value.trim())) {
-
-        email.classList.add("is-invalid");
-
-        valido = false;
-
-    } else {
-
-        email.classList.remove("is-invalid");
     }
 
     // SENHA

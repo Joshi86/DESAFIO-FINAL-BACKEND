@@ -92,13 +92,13 @@ async function carregarNotas() {
 
                     <td>
                         <button 
-                            class="btn btn-warning btn-sm"
+                            class="btn btn-warning btn-sm btn-acoes"
                             onclick='editarNota(${JSON.stringify(n)})'>
                             Editar
                         </button>
 
                         <button 
-                            class="btn btn-danger btn-sm"
+                            class="btn btn-danger btn-sm btn-acoes"
                             onclick="deletarNota(${n.id})">
                             Excluir
                         </button>

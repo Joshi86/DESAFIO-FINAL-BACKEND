@@ -25,9 +25,6 @@ namespace ProjetoEscola.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO dto)
         {
-            if (!dto.Email.EndsWith("@gmail.com"))
-                throw new Exception("Email inválido.");
-
             if (dto.Senha.Length < 6)
                 throw new Exception("A senha deve ter no mínimo 6 caracteres.");
 

@@ -78,7 +78,7 @@ async function carregarAlunos() {
                     Editar
                 </button>
 
-                <button class="btn btn-danger btn-sm"
+                <button class="btn btn-warning btn-sm"
                     onclick="deletar(${a.id})">
                     Excluir
                 </button>

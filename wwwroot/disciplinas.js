@@ -47,7 +47,7 @@ function esconderLoading() {
 
 async function carregarDisciplinas() {
 
-    const res = await fetch(`${api}/disciplinas`, {
+    const res = await fetch(`${api}/disciplina`, {
 
         headers: {
             "Authorization": `Bearer ${token}`

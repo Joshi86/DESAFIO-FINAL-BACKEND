@@ -141,8 +141,6 @@ async function cadastrar() {
 
                 username: username.value,
 
-                email: email.value,
-
                 senha: senha.value,
 
                 role: role
